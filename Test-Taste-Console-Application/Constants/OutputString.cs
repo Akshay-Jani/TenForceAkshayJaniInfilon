@@ -15,7 +15,12 @@
         public const string NoPlanetsFound = "No planets found.";
         public const string FileCreated = "The file is created in: ";
         public const string FolderCreated = "The folder is created in: ";
-        public const string LoadingData = "Loading data...";
-        public const string WritingData = "Writing data...";
+        public const string LoadingData = "Loading data for ";
+        public const string WritingData = "Writing data for ";
+        public const string LoadingDataForPlanet = "Planets...";
+        public const string LoadingDataForMoon = "Moons...";
+        public const string ExecutionOver = "Execution completed successfully!!!";
+        public const string LoadingDataForNoOfMoons = "Number of Moons for Each Planet...";
+        public const string LoadingDataForMoonMass = "Mass value of Each Moon...";
     }
 }

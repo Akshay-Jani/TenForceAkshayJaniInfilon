@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text;
-using Newtonsoft.Json;
 using Test_Taste_Console_Application.Constants;
 using Test_Taste_Console_Application.Domain.DataTransferObjects;
 using Test_Taste_Console_Application.Domain.DataTransferObjects.JsonObjects;
@@ -48,7 +48,7 @@ namespace Test_Taste_Console_Application.Domain.Services
             //If the planet doesn't have any moons, then it isn't added to the collection.
             foreach (var planet in results.Bodies)
             {
-                if(planet.Moons != null)
+                if (planet.Moons != null)
                 {
                     var newMoonsCollection = new Collection<MoonDto>();
                     foreach (var moon in planet.Moons)

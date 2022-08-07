@@ -15,35 +15,34 @@ namespace Test_Taste_Console_Application
     {
         static void Main(string[] args)
         {
-            var serviceCollection = new ServiceCollection();
-            //The ConfigureServices function configures the services.
-            ConfigureServices(serviceCollection);
-            
-            //The RunServiceOperations function executes the code that can create the outputs.
-            RunServiceOperations(serviceCollection);
-        }
-
-        private static void RunServiceOperations(IServiceCollection serviceCollection)
-        {
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-
-            //The service provider gets the services.
-            var screenOutputService = serviceProvider.GetService<IOutputService>();
-
             try
             {
-                screenOutputService.OutputAllPlanetsAndTheirAverageMoonGravityToConsole();
-                screenOutputService.OutputAllMoonsAndTheirMassToConsole();
-                screenOutputService.OutputAllPlanetsAndTheirMoonsToConsole();
+                var serviceCollection = new ServiceCollection();
+                //The ConfigureServices function configures the services.
+                ConfigureServices(serviceCollection);
+
+                //The RunServiceOperations function executes the code that can create the outputs.
+                RunServiceOperations(serviceCollection);
             }
             catch (Exception exception)
             {
                 //The users and developers can see the thrown exceptions.
-                Logger.Instance.Error($"{LoggerMessage.ScreenOutputOperationFailed}{exception.Message}");
+                Logger.Instance.Error($"{LoggerMessage.ScreenOutputOperationFailed}{exception.Message}{exception.StackTrace}");
                 Console.WriteLine($"{ExceptionMessage.ScreenOutputOperationFailed}{exception.Message}");
             }
+        }
 
-            serviceProvider.Dispose();
+        private static void RunServiceOperations(IServiceCollection serviceCollection)
+        {
+            using (var serviceProvider = serviceCollection.BuildServiceProvider())
+            {
+                //The service provider gets the services.
+                var screenOutputService = serviceProvider.GetService<IOutputService>();
+
+                screenOutputService.OutputAllPlanetsAndTheirAverageMoonGravityToConsole();
+                screenOutputService.OutputAllMoonsAndTheirMassToConsole();
+                screenOutputService.OutputAllPlanetsAndTheirMoonsToConsole();
+            }
         }
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
